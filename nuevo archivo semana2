@@ -1,0 +1,90 @@
+# Lista de 10 gastos de la semana del 14 de septiembre de 2026
+gasto_semana = [
+    {"fecha": "2026-09-14", "categoria": "alimentación", "descripcion": "Almuerzo de lunes a viernes", "monto": 16.25},
+    {"fecha": "2026-09-14", "categoria": "transporte", "descripcion": "Gasolina semana", "monto": 38.52},
+    {"fecha": "2026-09-15", "categoria": "salud", "descripcion": "Medicamentos farmacia", "monto": 18.20},
+    {"fecha": "2026-09-15", "categoria": "transporte", "descripcion": "parqueadero zona azul", "monto": 8.50},
+    {"fecha": "2026-09-16", "categoria": "alimentación", "descripcion": "Supermercado semanal", "monto": 115.40},
+    {"fecha": "2026-09-16", "categoria": "vivienda", "descripcion": "Reparación de tubería cobre", "monto": 65.00},
+    {"fecha": "2026-09-17", "categoria": "transporte", "descripcion": "Mantenimiento de 7500km", "monto": 214.99},
+    {"fecha": "2026-09-17", "categoria": "transporte", "descripcion": "Peajes", "monto": 7.50},
+    {"fecha": "2026-09-18", "categoria": "extracurriculares", "descripcion": "Ocupacion de la hija", "monto": 75.00},
+    {"fecha": "2026-09-19", "categoria": "vivienda", "descripcion": "pago servicios básicos", "monto": 26.80}
+]
+
+print(f"Se han registrado con éxito {len(gasto_semana)} gastos.")
+print("____________________________________________")
+# Prueba con montos diferentes
+montos_prueba = [4.99, 5, 50, 50.01]
+for monto in montos_prueba:
+    if monto < 5:
+        resultado = "gasto menor"
+    elif monto <= 50:
+        resultado = "gasto medio"
+    else:
+        resultado = "gasto mayor"
+
+    print(f"Monto: {monto} -> {resultado}")
+    total_gastos = 0
+contador_mayores = 0
+monto_mas_alto = 0.0
+for gasto in gasto_semana:
+    monto = gasto["monto"]
+    total_gastos += monto
+    if monto > 50:
+        contador_mayores += 1
+    if monto > monto_mas_alto:
+        monto_mas_alto = monto
+
+print(f"Total gastado: ${total_gastos:.2f}")
+print(f"Cantidad de 'gastos mayores' (>50): {contador_mayores}")
+print(f"Monto más alto encontrado: ${monto_mas_alto:.2f}")
+for indice, gasto in enumerate(gasto_semana, start=1):
+    print(f"{indice}. {gasto['fecha']} – {gasto['categoria']} – {gasto['monto']:.2f}")
+ahorro_actual = 0
+semanas_necesitadas = 0
+while ahorro_actual < 200:
+    ahorro_actual += 15
+    semanas_necesitadas += 1
+
+print(f"Se necesitaron {semanas_necesitadas} semanas para alcanzar ${ahorro_actual}.")
+montos_con_iva = [round(gasto["monto"] * 1.15, 2) for gasto in gasto_semana]
+descripciones_transporte = [gasto["descripcion"] for gasto in gasto_semana if gasto["categoria"] == "transporte"]
+diccionario_gastos = {gasto["descripcion"]: gasto["monto"] for gasto in gasto_semana}
+print("Montos con IVA (15%):", montos_con_iva)
+print("Descripciones de Transporte:", descripciones_transporte)
+print("Diccionario de Gastos:", diccionario_gastos)
+print("Encontrado el primer gasto mayor a 50 ")
+for gasto in gasto_semana:
+    if gasto["monto"] > 50:
+        print(f"Ciclo interrumpido en: {gasto['descripcion']} (${gasto['monto']})")
+        break
+suma_filtrada = 0
+for gasto in gasto_semana:
+    if gasto["categoria"] == "otros":
+        continue
+    suma_filtrada += gasto["monto"]
+print(f"\nSuma total (excluyendo la categoría 'otros'): ${suma_filtrada:.2f}")
+import random
+secreto = random.randint(1, 50)
+intentos_restantes = 6
+print("¡Adivina el Número!")
+print("Tienes 6 intentos para descubrir un número entero que va entre el 1 y el 50.")
+
+while intentos_restantes > 0:
+    try:
+        posible_numero = int(input(f"\nTe quedan {intentos_restantes} intentos. Ingresa tu número: "))
+        if posible_numero == secreto:
+            print(f"¡Felicidades! Adivinaste el número secreto ({secreto}).")
+            break
+        elif posible_numero < secreto:
+            print("El número secreto es mayor.")
+        else:
+            print("El número secreto es menor.")
+        intentos_restantes -= 1
+    except ValueError:
+        print("Por favor, introduce solo un número entero válido.")
+        continue
+
+if intentos_restantes == 0:
+    print(f"\nTe has quedado sin intentos. El número secreto era {secreto}. ¡Suerte la próxima!")
